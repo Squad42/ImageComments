@@ -19,21 +19,24 @@ config_path_template = os.path.join(APP_ROOT, "TEMPLATE_config_environment.py")
 # Sending loggs to logit.io
 # Create the logger and set it's logging level
 logger_logit = logging.getLogger("logstash")
-logger_logit.setLevel(logging.ERROR)        
+logger_logit.setLevel(logging.ERROR)
 # Create the handler
 handler = AsynchronousLogstashHandler(
-    host='fc652908-5b50-4887-8af2-89286e6febe1-ls.logit.io', 
-    port=17326, 
-    ssl_enable=True, 
+    host="fc652908-5b50-4887-8af2-89286e6febe1-ls.logit.io",
+    port=17326,
+    ssl_enable=True,
     ssl_verify=False,
-    database_path='')
+    database_path="",
+)
 # Here you can specify additional formatting on your log record/message
-formatter = LogstashFormatter(message_type='python-logstash',
-    extra_prefix='extra',
-    extra=dict(mikrostoritev='imageUpload', okolje='production'))
+formatter = LogstashFormatter(
+    message_type="python-logstash",
+    extra_prefix="extra",
+    extra=dict(mikrostoritev="imageUpload", okolje="production"),
+)
 handler.setFormatter(formatter)
 # Assign handler to the logger
-logger_logit.addHandler(handler) 
+logger_logit.addHandler(handler)
 
 try:
     # if config_path.exists():
@@ -84,6 +87,15 @@ class DevelopmentConfig(Config):
     DB_HOST_PORT = os.environ["POSTGRES_PORT"]
     DB_NAME = os.environ["POSTGRES_DB"]
 
+    # ## LOCAL DATABASE TESTING
+    # DB_USER = "test_user"
+    # DB_PASSWORD = "password1"
+    # DB_HOST_IP = "postgres_comments"
+    # DB_HOST_PORT = 5432
+    # # TODO ::  CHANGE THE LINK OF DATABASE
+    # DB_NAME = "db_comments_example"
+    # DB_INITIALIZE = "True"
+
     DATABASE_CONNECTION_URI = "postgresql+psycopg2://{user}:{password}@{host}:{port}/{db}".format(
         user=DB_USER, password=DB_PASSWORD, host=DB_HOST_IP, port=DB_HOST_PORT, db=DB_NAME
     )
@@ -92,15 +104,16 @@ class DevelopmentConfig(Config):
 
     # CONFIG SERVER
     if "CONSUL_HOST" in os.environ:
-    	CONFIG_HOST = os.environ["CONSUL_HOST"]
+        CONFIG_HOST = os.environ["CONSUL_HOST"]
     else:
         CONFIG_HOST = "localhost"
     if "CONSUL_PORT" in os.environ:
-    	CONFIG_PORT = os.environ["CONSUL_PORT"]
+        CONFIG_PORT = os.environ["CONSUL_PORT"]
     else:
         CONFIG_PORT = 8500
 
     LOGGER = logger_logit
+
 
 class TestingConfig(Config):
     TESTING = True
