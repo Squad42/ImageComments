@@ -79,18 +79,18 @@ def fetch_filtered(img_url):
     #     }
     #     all_image_comments.append(new_image_comment)
     # return json.dumps(all_image_comments), 200
-    all_image_comments = []
+    # all_image_comments = []
     image_comments = get_all(ImageComments)
-    all_image_comments = []
+    all_image_comments = {}
     for img_comment in image_comments:
-        print("COMPARING:    ", flush=True)
-        print(img_comment.img_uri + "   vs   " + img_url + "\n", flush=True)
+        # print("COMPARING:    ", flush=True)
+        # print(img_comment.img_uri + "   vs   " + img_url + "\n", flush=True)
         if (
             img_comment.img_uri.replace("?dl=1", "").replace("?dl=0", "").replace("?raw=1", "")
             == img_url
         ):
-            new_image_comment = {"username": img_comment.username, "text": img_comment.text}
-            all_image_comments.append(new_image_comment)
+            # new_image_comment = {"username": img_comment.username, "text": img_comment.text}
+            all_image_comments[img_comment.username] = img_comment.text
     return json.dumps(all_image_comments), 200
 
 
