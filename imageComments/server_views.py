@@ -5,6 +5,7 @@ from imageComments.models import ImageComments
 from imageComments.manage_db import get_all, add_instance, delete_instance, edit_instance
 from functools import wraps
 import jwt
+import datetime
 
 
 def jwt_token_required(func):
@@ -106,7 +107,7 @@ def add():
     username = data["username"]
     text = data["text"]
     img_uri = data["img_uri"]
-    created_datetime = data["created_datetime"]
+    created_datetime = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
 
     add_instance(
         ImageComments,
