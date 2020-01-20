@@ -1,3 +1,32 @@
+## USER ADDED GITIGNORES
+
+imageComments/config_environment.py
+imageComments/__pycache__/
+
+## ENV / IDE GITIGNORES
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+
+
+# Pytest stuff
+.pytest_cache
+imageComments/.pytest_cache
+imageComments/tests/.pytest_cache
+__pycache__
+imageComments/__pycache__
+imageComments/tests/__pycache__
+
+
+
+## PYTHON SPECIFIC GITIGNORE
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
