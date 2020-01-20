@@ -1,5 +1,5 @@
 # SAMPLE IMPORTs TEST
-from userManagement.server import *
+from imageComments.server import *
 
 
 def func(x):
